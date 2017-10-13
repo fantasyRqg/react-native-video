@@ -1,7 +1,5 @@
 package com.brentvatne.react;
 
-import android.util.Log;
-
 import com.brentvatne.react.ReactVideoView.Events;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.common.MapBuilder;
@@ -106,11 +104,9 @@ public class ReactVideoViewManager extends SimpleViewManager<ReactVideoView> {
         }
     }
 
-    private static final String TAG = "ReactVideoViewManager";
 
     @ReactProp(name = PROP_CORNER_RADIUS, defaultFloat = 0.0f)
     public void setCornerRadius(final ReactVideoView videoView, final float radius) {
-        Log.d(TAG, "setCornerRadius() called with: videoView = [" + videoView + "], radius = [" + radius + "]");
         videoView.setCornerRadius(radius);
     }
 
