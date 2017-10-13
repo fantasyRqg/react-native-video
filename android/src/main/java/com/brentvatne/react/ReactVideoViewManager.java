@@ -1,18 +1,18 @@
 package com.brentvatne.react;
 
+import android.util.Log;
+
 import com.brentvatne.react.ReactVideoView.Events;
-import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReadableMap;
-import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.common.MapBuilder;
-import com.facebook.react.uimanager.annotations.ReactProp;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
-import com.facebook.react.uimanager.events.RCTEventEmitter;
+import com.facebook.react.uimanager.annotations.ReactProp;
 import com.yqritc.scalablevideoview.ScalableType;
 
-import javax.annotation.Nullable;
 import java.util.Map;
+
+import javax.annotation.Nullable;
 
 public class ReactVideoViewManager extends SimpleViewManager<ReactVideoView> {
 
@@ -35,6 +35,8 @@ public class ReactVideoViewManager extends SimpleViewManager<ReactVideoView> {
     public static final String PROP_RATE = "rate";
     public static final String PROP_PLAY_IN_BACKGROUND = "playInBackground";
     public static final String PROP_CONTROLS = "controls";
+    public static final String PROP_CORNER_RADIUS = "cornerRadius";
+
 
     @Override
     public String getName() {
@@ -43,7 +45,9 @@ public class ReactVideoViewManager extends SimpleViewManager<ReactVideoView> {
 
     @Override
     protected ReactVideoView createViewInstance(ThemedReactContext themedReactContext) {
-        return new ReactVideoView(themedReactContext);
+        ReactVideoView reactVideoView = new ReactVideoView(themedReactContext);
+        reactVideoView.setCornerRadius(20);
+        return reactVideoView;
     }
 
     @Override
@@ -77,9 +81,13 @@ public class ReactVideoViewManager extends SimpleViewManager<ReactVideoView> {
     public void setSrc(final ReactVideoView videoView, @Nullable ReadableMap src) {
         int mainVer = src.getInt(PROP_SRC_MAINVER);
         int patchVer = src.getInt(PROP_SRC_PATCHVER);
-        if(mainVer<0) { mainVer = 0; }
-        if(patchVer<0) { patchVer = 0; }
-        if(mainVer>0) {
+        if (mainVer < 0) {
+            mainVer = 0;
+        }
+        if (patchVer < 0) {
+            patchVer = 0;
+        }
+        if (mainVer > 0) {
             videoView.setSrc(
                     src.getString(PROP_SRC_URI),
                     src.getString(PROP_SRC_TYPE),
@@ -88,8 +96,7 @@ public class ReactVideoViewManager extends SimpleViewManager<ReactVideoView> {
                     mainVer,
                     patchVer
             );
-        }
-        else {
+        } else {
             videoView.setSrc(
                     src.getString(PROP_SRC_URI),
                     src.getString(PROP_SRC_TYPE),
@@ -97,6 +104,14 @@ public class ReactVideoViewManager extends SimpleViewManager<ReactVideoView> {
                     src.getBoolean(PROP_SRC_IS_ASSET)
             );
         }
+    }
+
+    private static final String TAG = "ReactVideoViewManager";
+
+    @ReactProp(name = PROP_CORNER_RADIUS, defaultFloat = 0.0f)
+    public void setCornerRadius(final ReactVideoView videoView, final float radius) {
+        Log.d(TAG, "setCornerRadius() called with: videoView = [" + videoView + "], radius = [" + radius + "]");
+        videoView.setCornerRadius(radius);
     }
 
     @ReactProp(name = PROP_RESIZE_MODE)

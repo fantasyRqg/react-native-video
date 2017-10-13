@@ -13,10 +13,20 @@ android {
             abiFilters "armeabi-v7a", "x86"
         }
     }
-}
 
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+}
+repositories {
+    maven {
+        url 'http://nexus.zerozero.cn/repository/maven-public/'
+    }
+}
 dependencies {
     //noinspection GradleDynamicVersion
     provided 'com.facebook.react:react-native:+'
-    compile 'com.yqritc:android-scalablevideoview:1.0.4'
+    implementation 'com.yqritc.scalablevideoview:scalablevideoview:1.0.3'
+    implementation 'rqg.fantasy.roundedvideoview:roundedvideoview:1.0.1'
 }
