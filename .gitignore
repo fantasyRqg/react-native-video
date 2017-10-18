@@ -30,7 +30,7 @@ project.xcworkspace
 local.properties
 *.hprof
 
-# node.js
+# node.app
 #
 node_modules/
 npm-debug.log

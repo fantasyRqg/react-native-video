@@ -28,5 +28,5 @@ dependencies {
     //noinspection GradleDynamicVersion
     provided 'com.facebook.react:react-native:+'
     implementation 'com.yqritc.scalablevideoview:scalablevideoview:1.0.3'
-    implementation 'rqg.fantasy.roundedvideoview:roundedvideoview:1.0.1'
+    implementation 'rqg.fantasy.roundedvideoview:roundedvideoview:1.0.2'
 }

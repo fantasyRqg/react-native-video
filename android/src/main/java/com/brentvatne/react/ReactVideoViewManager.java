@@ -3,6 +3,7 @@ package com.brentvatne.react;
 import com.brentvatne.react.ReactVideoView.Events;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.common.MapBuilder;
+import com.facebook.react.uimanager.PixelUtil;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
@@ -43,9 +44,7 @@ public class ReactVideoViewManager extends SimpleViewManager<ReactVideoView> {
 
     @Override
     protected ReactVideoView createViewInstance(ThemedReactContext themedReactContext) {
-        ReactVideoView reactVideoView = new ReactVideoView(themedReactContext);
-        reactVideoView.setCornerRadius(20);
-        return reactVideoView;
+        return new ReactVideoView(themedReactContext);
     }
 
     @Override
@@ -107,7 +106,8 @@ public class ReactVideoViewManager extends SimpleViewManager<ReactVideoView> {
 
     @ReactProp(name = PROP_CORNER_RADIUS, defaultFloat = 0.0f)
     public void setCornerRadius(final ReactVideoView videoView, final float radius) {
-        videoView.setCornerRadius(radius);
+
+        videoView.setCornerRadius(PixelUtil.toPixelFromDIP(radius));
     }
 
     @ReactProp(name = PROP_RESIZE_MODE)
