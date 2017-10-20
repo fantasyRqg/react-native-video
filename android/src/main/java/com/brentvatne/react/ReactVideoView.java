@@ -136,8 +136,6 @@ public class ReactVideoView extends ScalableVideoView implements MediaPlayer.OnP
     }
 
 
-
-
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (mUseNativeControls) {
